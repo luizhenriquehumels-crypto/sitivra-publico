@@ -63,6 +63,7 @@
     selectedPeriod=period;const data=scenarios[selectedScenario][period];if(!data)return;
     for(const key of ['sessions','sessionsDiff','ctr','ctrDiff','engagement','engagementDiff']){const target=$('#'+key.replace(/[A-Z]/g,x=>'-'+x.toLowerCase()));target.textContent=data[key];if(key.endsWith('Diff'))target.className=data.direction;}
     const partial=selectedScenario==='insufficient';
+    $$('.metric-foot').forEach(foot=>{for(const node of foot.childNodes)if(node.nodeType===3)node.textContent=partial?' neste exemplo':' vs. anterior';});
     $('#chart-period').textContent=partial?'5 dias disponíveis · sem comparação':`Comparação de ${period} dias`;
     $('#insight-copy').textContent=data.desc;
     $('#scenario-summary').textContent=partial?'DADOS FICTÍCIOS · Histórico insuficiente. Tendência e recomendações suspensas.':`DADOS FICTÍCIOS · ${selectedScenario==='growth'?'Crescimento':'Queda'} · comparação de dois períodos de ${period} dias.`;
